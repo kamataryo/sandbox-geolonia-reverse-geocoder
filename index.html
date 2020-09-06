@@ -76,7 +76,12 @@
             "text-halo-width": 2,
           },
           layout: {
-            "text-field": "{PREF_NAME}{CITY_NAME}{MOJI}",
+            "text-field": [
+              "concat",
+              ["get", "PREF_NAME"],
+              ["get", "CITY_NAME"],
+              ["case", ["!=", ["get", "S_NAME"], null], ["get", "S_NAME"], ""],
+            ],
             "text-font": ["Noto Sans Regular"],
             "text-variable-anchor": ["top", "bottom", "left", "right"],
             "text-justify": "auto",
@@ -94,7 +99,7 @@
         );
 
         map.fitBounds(bounds, {
-          padding: 20,
+          padding: 100,
         });
 
         if (lnglat) {
