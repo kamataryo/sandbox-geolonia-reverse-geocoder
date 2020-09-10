@@ -103,10 +103,7 @@
         });
 
         if (lnglat) {
-          const marker = new window.geolonia.Marker()
-            .setLngLat(lnglat)
-            .addTo(map);
-          return { marker, boundarySource };
+          return { boundarySource };
         }
       };
 
@@ -126,12 +123,7 @@
 
       Promise.all([mapReady, geolocationReady]).then(
         ([map, { geometry, properties, lnglat }]) => {
-          const { boundarySource, marker } = render(
-            map,
-            geometry,
-            properties,
-            lnglat
-          );
+          const { boundarySource } = render(map, geometry, properties, lnglat);
           map.on("click", (event) => {
             const { lat, lng } = event.lngLat;
             geocode(lng, lat).then(({ geometry, properties }) => {
